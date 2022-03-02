@@ -42,6 +42,7 @@ const cardsDisplay = (cards) => {
         console.log(card);
         const div = document.createElement("div");
         div.classList.add("col-lg-4");
+        div.classList.add("col-12");
         div.classList.add("mb-5");
 
         div.innerHTML = `
