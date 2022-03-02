@@ -1,4 +1,5 @@
 const main = document.getElementById("main");
+const phoneDetails = document.getElementById('phone-details');
 const searchButton = () => {
     const input = document.getElementById("input-value");
     const error = document.getElementById("error");
@@ -19,6 +20,7 @@ const searchButton = () => {
     else {
         // clear main context data before the search
         main.innerHTML = "";
+
         fetch(`https://openapi.programming-hero.com/api/phones?search=${inputValue}`)
             .then(res => res.json())
             .then(data => cardsDisplay(data.data));
@@ -27,6 +29,7 @@ const searchButton = () => {
         input.value = "";
         // clear error context data before the search
         error.innerHTML = "";
+        phoneDetails.innerHTML = "";
     }
 }
 
@@ -63,7 +66,7 @@ const loadPhoneDetail = slug => {
 }
 
 const displayPhoneDetail = id => {
-    console.log(id);
+    console.log(id.data.others.NFC);
 
     const phoneDetails = document.getElementById('phone-details');
     // clear error context data before the details
@@ -75,11 +78,19 @@ const displayPhoneDetail = id => {
     <div class="card-body">
         <h5 class="card-title">${id.data.name}</h5>
         <p class="card-text">ReleaseDate: ${id.data.releaseDate}</p>
-        <p class="card-text">MainFeatures</p>
+        <p class="card-text fw-bold">MainFeatures</p>
         <p class="card-text">ChipSet: ${id.data.mainFeatures.chipSet}</p>
-        <p class="card-text">Sensors: ${id.data.mainFeatures.sensors[0]}, ${id.data.mainFeatures.sensors[1]}
-        , ${id.data.mainFeatures.sensors[2]}, ${id.data.mainFeatures.sensors[3]}, ${id.data.mainFeatures.sensors[4]}
-        , ${id.data.mainFeatures.sensors[5]}</p>
+        <p class="card-text fw-bold">Sensors</p>
+        <p class="card-text">${id.data.mainFeatures.sensors[0]}, ${id.data.mainFeatures.sensors[1]},
+        ${id.data.mainFeatures.sensors[2]}, ${id.data.mainFeatures.sensors[3]},
+        ${id.data.mainFeatures.sensors[4]}, ${id.data.mainFeatures.sensors[5]}</p>
+        <p class="card-text fw-bold">Other Features</p>
+        <p class="card-text"><span class="fw-bold">WLAN</span>: ${id.data.others.WLAN}</p>
+        <p class="card-text"><span class="fw-bold">Bluetooth</span>: ${id.data.others.Bluetooth}</p>
+        <p class="card-text"><span class="fw-bold">GPS</span>: ${id.data.others.GPS}</p>
+        <p class="card-text"><span class="fw-bold">NFC</span>: ${id.data.others.NFC}</p>
+        
+        
         
         
         
