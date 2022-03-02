@@ -16,6 +16,7 @@ const searchButton = () => {
 
 
     }
+    // after error cheacking search box load the api
 
     else {
         // clear main context data before the search
@@ -23,8 +24,9 @@ const searchButton = () => {
 
         fetch(`https://openapi.programming-hero.com/api/phones?search=${inputValue}`)
             .then(res => res.json())
-            .then(data => cardsDisplay(data.data));
-        // .then(data => console.log(data));
+            // .then(data => cardsDisplay(data.data));
+            // 20 product displayed in website
+            .then(data => cardsDisplay(data.data.slice(0, 20)));
         // clear input data
         input.value = "";
         // clear error context data before the search
@@ -32,12 +34,12 @@ const searchButton = () => {
         phoneDetails.innerHTML = "";
     }
 }
-
+// searching result display in website
 const cardsDisplay = (cards) => {
-    // // cards = data.data;
+    // cards.slice(0, 19);
     // console.log(cards);
     for (const card of cards) {
-        // console.log(card);
+        console.log(card);
         const div = document.createElement("div");
         div.classList.add("col-lg-4");
         div.classList.add("mb-5");
@@ -56,6 +58,7 @@ const cardsDisplay = (cards) => {
     }
 }
 
+// product details load the search api 
 
 const loadPhoneDetail = slug => {
     const url = `https://openapi.programming-hero.com/api/phone/${slug}`;
@@ -64,7 +67,7 @@ const loadPhoneDetail = slug => {
         // .then(data => displayPhoneDetail(data.data));
         .then(data => displayPhoneDetail(data));
 }
-
+// detail product info display in website
 const displayPhoneDetail = id => {
     console.log(id.data.others.NFC);
 
@@ -77,7 +80,7 @@ const displayPhoneDetail = id => {
     <img src="${id.data.image}" class="card-img-top"  alt="...">
     <div class="card-body">
         <h5 class="card-title">${id.data.name}</h5>
-        <p class="card-text">ReleaseDate: ${id.data.releaseDate}</p>
+        <p class="card-text">ReleaseDate: ${id.data.releaseDate ? id.data.releaseDate : "Not Avaible"}</p>
         <p class="card-text fw-bold">MainFeatures</p>
         <p class="card-text">ChipSet: ${id.data.mainFeatures.chipSet}</p>
         <p class="card-text fw-bold">Sensors</p>
