@@ -58,23 +58,29 @@ const loadPhoneDetail = slug => {
     const url = `https://openapi.programming-hero.com/api/phone/${slug}`;
     fetch(url)
         .then(res => res.json())
-        .then(data => displayPhoneDetail(data.data));
+        // .then(data => displayPhoneDetail(data.data));
+        .then(data => displayPhoneDetail(data));
 }
 
 const displayPhoneDetail = id => {
     console.log(id);
+
     const phoneDetails = document.getElementById('phone-details');
     // clear error context data before the details
     phoneDetails.innerHTML = "";
     const div = document.createElement('div');
     div.classList.add('card');
     div.innerHTML = `
-    <img src="${id.image}" class="card-img-top"  alt="...">
+    <img src="${id.data.image}" class="card-img-top"  alt="...">
     <div class="card-body">
-        <h5 class="card-title">${id.name}</h5>
-        <p class="card-text">ReleaseDate: ${id.releaseDate}</p>
+        <h5 class="card-title">${id.data.name}</h5>
+        <p class="card-text">ReleaseDate: ${id.data.releaseDate}</p>
         <p class="card-text">MainFeatures</p>
-        <p class="card-text">ChipSet: ${id.mainFeatures.chipSet}</p>
+        <p class="card-text">ChipSet: ${id.data.mainFeatures.chipSet}</p>
+        <p class="card-text">Sensors: ${id.data.mainFeatures.sensors[0]}, ${id.data.mainFeatures.sensors[1]}
+        , ${id.data.mainFeatures.sensors[2]}, ${id.data.mainFeatures.sensors[3]}, ${id.data.mainFeatures.sensors[4]}
+        , ${id.data.mainFeatures.sensors[5]}</p>
+        
         
         
     </div>
