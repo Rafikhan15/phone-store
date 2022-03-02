@@ -4,6 +4,8 @@ const searchButton = () => {
     const input = document.getElementById("input-value");
     const error = document.getElementById("error");
     const inputValue = input.value;
+    // spinner block
+    toggleSpinner('block');
 
     if (inputValue == "" || isNaN(inputValue) != true) { //isNaN check number or string /others
 
@@ -13,6 +15,7 @@ const searchButton = () => {
         input.value = "";
         // clear input data before the search
         main.innerHTML = "";
+
 
 
     }
@@ -57,6 +60,8 @@ const cardsDisplay = (cards) => {
         `
         main.appendChild(div);
     }
+    // spinner none
+    toggleSpinner('none');
 }
 
 // product details load the search api 
@@ -103,6 +108,12 @@ const displayPhoneDetail = id => {
     phoneDetails.appendChild(div);
 
 }
+
+const toggleSpinner = displayStyle => {
+    document.getElementById('spinner').style.display = displayStyle;
+
+};
+
 
 
 
